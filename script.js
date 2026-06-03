@@ -1,5 +1,19 @@
 import {
 getAuth,
+signOut
+}
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+window.logout = async()=>{
+
+await signOut(getAuth());
+
+location.href="login.html";
+
+}
+import {
+getAuth,
 onAuthStateChanged
 }
 from
