@@ -1,33 +1,174 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nilai Siswa Kelas 5</title>
-<link rel="stylesheet" href="style.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+    padding:20px;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+    background:#fff;
+    border-radius:12px;
+    padding:20px;
+    box-shadow:0 4px 10px rgba(0,0,0,.1);
+}
+
+h1{
+    text-align:center;
+    color:#1565c0;
+    margin-bottom:20px;
+}
+
+.identitas{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+    padding:15px;
+    background:#e3f2fd;
+    border-radius:10px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#1565c0;
+    color:white;
+    padding:10px;
+}
+
+td{
+    padding:10px;
+    border-bottom:1px solid #ddd;
+    text-align:center;
+}
+
+tr:hover{
+    background:#f5f5f5;
+}
+
+.rata{
+    margin-top:20px;
+    text-align:right;
+    font-size:22px;
+    font-weight:bold;
+    color:#2e7d32;
+}
+
+.predikat{
+    text-align:right;
+    margin-top:10px;
+    font-size:18px;
+    color:#ff6f00;
+}
+
+.footer{
+    text-align:center;
+    margin-top:20px;
+    color:#666;
+}
+</style>
 </head>
 <body>
 
 <div class="container">
 
-<h2>Data Nilai Siswa</h2>
+<h1>📚 DAFTAR NILAI SISWA KELAS 5</h1>
 
-<table>
-
-<thead>
-<tr>
-<th>Nama</th>
-<th>Kelas</th>
-<th>Rata-rata</th>
-</tr>
-</thead>
-
-<tbody id="dataNilai">
-</tbody>
-
-</table>
+<div class="identitas">
+    <div><b>Nama :</b> Ahmad Fauzi</div>
+    <div><b>Kelas :</b> V (Lima)</div>
 </div>
 
-<script type="module" src="script.js"></script>
+<table>
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Mata Pelajaran</th>
+            <th>Nilai</th>
+        </tr>
+    </thead>
+    <tbody id="dataNilai"></tbody>
+</table>
+
+<div class="rata">
+    Rata-rata : <span id="rataRata"></span>
+</div>
+
+<div class="predikat">
+    Predikat : <span id="predikat"></span>
+</div>
+
+<div class="footer">
+    SD Negeri Dukohkidul
+</div>
+
+</div>
+
+<script>
+const nilaiSiswa = [
+    {mapel:"Pendidikan Agama dan Budi Pekerti", nilai:90},
+    {mapel:"Pendidikan Pancasila", nilai:88},
+    {mapel:"Bahasa Indonesia", nilai:85},
+    {mapel:"Matematika", nilai:92},
+    {mapel:"IPAS", nilai:89},
+    {mapel:"Seni Budaya", nilai:95},
+    {mapel:"PJOK", nilai:93},
+    {mapel:"Bahasa Inggris", nilai:87},
+    {mapel:"Bahasa Jawa", nilai:91}
+];
+
+const tbody = document.getElementById("dataNilai");
+
+let total = 0;
+
+nilaiSiswa.forEach((item,index)=>{
+    total += item.nilai;
+
+    tbody.innerHTML += `
+    <tr>
+        <td>${index+1}</td>
+        <td>${item.mapel}</td>
+        <td>${item.nilai}</td>
+    </tr>
+    `;
+});
+
+let rata = (total / nilaiSiswa.length).toFixed(2);
+
+document.getElementById("rataRata").innerText = rata;
+
+let predikat = "";
+
+if(rata >= 90){
+    predikat = "A (Sangat Baik)";
+}else if(rata >= 80){
+    predikat = "B (Baik)";
+}else if(rata >= 70){
+    predikat = "C (Cukup)";
+}else{
+    predikat = "D (Perlu Bimbingan)";
+}
+
+document.getElementById("predikat").innerText = predikat;
+</script>
 
 </body>
 </html>
