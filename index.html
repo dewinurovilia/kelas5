@@ -10,11 +10,11 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial,sans-serif;
+    font-family:Segoe UI, Arial, sans-serif;
 }
 
 body{
-    background:#f4f6f9;
+    background:#f4f7fb;
     padding:20px;
 }
 
@@ -22,9 +22,9 @@ body{
     max-width:900px;
     margin:auto;
     background:#fff;
-    border-radius:12px;
-    padding:20px;
-    box-shadow:0 4px 10px rgba(0,0,0,.1);
+    border-radius:15px;
+    padding:25px;
+    box-shadow:0 4px 15px rgba(0,0,0,.1);
 }
 
 h1{
@@ -33,14 +33,30 @@ h1{
     margin-bottom:20px;
 }
 
-.identitas{
-    display:flex;
-    justify-content:space-between;
-    flex-wrap:wrap;
+.select-box{
     margin-bottom:20px;
-    padding:15px;
-    background:#e3f2fd;
+}
+
+label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:bold;
+}
+
+select{
+    width:100%;
+    padding:12px;
+    border:2px solid #1565c0;
     border-radius:10px;
+    font-size:16px;
+}
+
+.info{
+    background:#e3f2fd;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:20px;
+    font-size:18px;
 }
 
 table{
@@ -51,7 +67,7 @@ table{
 th{
     background:#1565c0;
     color:white;
-    padding:10px;
+    padding:12px;
 }
 
 td{
@@ -61,28 +77,18 @@ td{
 }
 
 tr:hover{
-    background:#f5f5f5;
+    background:#f8fbff;
 }
 
-.rata{
-    margin-top:20px;
+.rata-rata{
+    margin-top:15px;
+    background:#e8f5e9;
+    padding:15px;
+    border-radius:10px;
     text-align:right;
     font-size:22px;
     font-weight:bold;
     color:#2e7d32;
-}
-
-.predikat{
-    text-align:right;
-    margin-top:10px;
-    font-size:18px;
-    color:#ff6f00;
-}
-
-.footer{
-    text-align:center;
-    margin-top:20px;
-    color:#666;
 }
 </style>
 </head>
@@ -90,11 +96,15 @@ tr:hover{
 
 <div class="container">
 
-<h1>📚 DAFTAR NILAI SISWA KELAS 5</h1>
+<h1>📚 NILAI SISWA KELAS 5</h1>
 
-<div class="identitas">
-    <div><b>Nama :</b> Ahmad Fauzi</div>
-    <div><b>Kelas :</b> V (Lima)</div>
+<div class="select-box">
+    <label>Pilih Nama Siswa</label>
+    <select id="namaSiswa"></select>
+</div>
+
+<div class="info">
+    <b>Kelas :</b> <span id="kelas"></span>
 </div>
 
 <table>
@@ -105,69 +115,247 @@ tr:hover{
             <th>Nilai</th>
         </tr>
     </thead>
-    <tbody id="dataNilai"></tbody>
+    <tbody id="tabelNilai"></tbody>
 </table>
 
-<div class="rata">
-    Rata-rata : <span id="rataRata"></span>
-</div>
-
-<div class="predikat">
-    Predikat : <span id="predikat"></span>
-</div>
-
-<div class="footer">
-    SD Negeri Dukohkidul
+<div class="rata-rata">
+    Rata-rata : <span id="rata">0</span>
 </div>
 
 </div>
 
 <script>
-const nilaiSiswa = [
-    {mapel:"Pendidikan Agama dan Budi Pekerti", nilai:90},
-    {mapel:"Pendidikan Pancasila", nilai:88},
-    {mapel:"Bahasa Indonesia", nilai:85},
-    {mapel:"Matematika", nilai:92},
-    {mapel:"IPAS", nilai:89},
-    {mapel:"Seni Budaya", nilai:95},
-    {mapel:"PJOK", nilai:93},
-    {mapel:"Bahasa Inggris", nilai:87},
-    {mapel:"Bahasa Jawa", nilai:91}
-];
 
-const tbody = document.getElementById("dataNilai");
+const siswa = {
 
-let total = 0;
+"AZKA BRIYAN LEO RIDWAN":{
+kelas:"V",
+nilai:{
+"Pendidikan Agama":0,
+"Pendidikan Pancasila":0,
+"Bahasa Indonesia":0,
+"Matematika":0,
+"IPAS":0,
+"Seni Budaya":0,
+"PJOK":0,
+"Bahasa Inggris":0,
+"Bahasa Jawa":0,
+"Koding KKA":0,
+"Literasi Digital":0
+}
+},
 
-nilaiSiswa.forEach((item,index)=>{
-    total += item.nilai;
+"DAWIATU SHOLIKHAH":{
+kelas:"V",
+nilai:{
+"Pendidikan Agama":0,
+"Pendidikan Pancasila":0,
+"Bahasa Indonesia":0,
+"Matematika":0,
+"IPAS":0,
+"Seni Budaya":0,
+"PJOK":0,
+"Bahasa Inggris":0,
+"Bahasa Jawa":0,
+"Koding KKA":0,
+"Literasi Digital":0
+}
+},
 
-    tbody.innerHTML += `
-    <tr>
-        <td>${index+1}</td>
-        <td>${item.mapel}</td>
-        <td>${item.nilai}</td>
-    </tr>
-    `;
-});
+"MOH. ADIT IYAN":{
+kelas:"V",
+nilai:{
+"Pendidikan Agama":0,
+"Pendidikan Pancasila":0,
+"Bahasa Indonesia":0,
+"Matematika":0,
+"IPAS":0,
+"Seni Budaya":0,
+"PJOK":0,
+"Bahasa Inggris":0,
+"Bahasa Jawa":0,
+"Koding KKA":0,
+"Literasi Digital":0
+}
+},
 
-let rata = (total / nilaiSiswa.length).toFixed(2);
+"MOH. FARHAN RHOMADHONI":{
+kelas:"V",
+nilai:{
+"Pendidikan Agama":0,
+"Pendidikan Pancasila":0,
+"Bahasa Indonesia":0,
+"Matematika":0,
+"IPAS":0,
+"Seni Budaya":0,
+"PJOK":0,
+"Bahasa Inggris":0,
+"Bahasa Jawa":0,
+"Koding KKA":0,
+"Literasi Digital":0
+}
+},
 
-document.getElementById("rataRata").innerText = rata;
+"MUHAMMAD DWI PUJI WIJAYANTO":{
+kelas:"V",
+nilai:{
+"Pendidikan Agama":0,
+"Pendidikan Pancasila":0,
+"Bahasa Indonesia":0,
+"Matematika":0,
+"IPAS":0,
+"Seni Budaya":0,
+"PJOK":0,
+"Bahasa Inggris":0,
+"Bahasa Jawa":0,
+"Koding KKA":0,
+"Literasi Digital":0
+}
+},
 
-let predikat = "";
+"MUHAMMAD DYNAR SETIAWAN":{
+kelas:"V",
+nilai:{
+"Pendidikan Agama":0,
+"Pendidikan Pancasila":0,
+"Bahasa Indonesia":0,
+"Matematika":0,
+"IPAS":0,
+"Seni Budaya":0,
+"PJOK":0,
+"Bahasa Inggris":0,
+"Bahasa Jawa":0,
+"Koding KKA":0,
+"Literasi Digital":0
+}
+},
 
-if(rata >= 90){
-    predikat = "A (Sangat Baik)";
-}else if(rata >= 80){
-    predikat = "B (Baik)";
-}else if(rata >= 70){
-    predikat = "C (Cukup)";
-}else{
-    predikat = "D (Perlu Bimbingan)";
+"MUHAMMAD IRHAM MUSTAQIM":{
+kelas:"V",
+nilai:{
+"Pendidikan Agama":0,
+"Pendidikan Pancasila":0,
+"Bahasa Indonesia":0,
+"Matematika":0,
+"IPAS":0,
+"Seni Budaya":0,
+"PJOK":0,
+"Bahasa Inggris":0,
+"Bahasa Jawa":0,
+"Koding KKA":0,
+"Literasi Digital":0
+}
+},
+
+"NESYA SEPTIA DEWI ARISTA":{
+kelas:"V",
+nilai:{
+"Pendidikan Agama":0,
+"Pendidikan Pancasila":0,
+"Bahasa Indonesia":0,
+"Matematika":0,
+"IPAS":0,
+"Seni Budaya":0,
+"PJOK":0,
+"Bahasa Inggris":0,
+"Bahasa Jawa":0,
+"Koding KKA":0,
+"Literasi Digital":0
+}
+},
+
+"NIA NUR ANISSA FIRDAUS AHMAD RUKI":{
+kelas:"V",
+nilai:{
+"Pendidikan Agama":0,
+"Pendidikan Pancasila":0,
+"Bahasa Indonesia":0,
+"Matematika":0,
+"IPAS":0,
+"Seni Budaya":0,
+"PJOK":0,
+"Bahasa Inggris":0,
+"Bahasa Jawa":0,
+"Koding KKA":0,
+"Literasi Digital":0
+}
+},
+
+"RISMA AYU FEBRIANTI":{
+kelas:"V",
+nilai:{
+"Pendidikan Agama":0,
+"Pendidikan Pancasila":0,
+"Bahasa Indonesia":0,
+"Matematika":0,
+"IPAS":0,
+"Seni Budaya":0,
+"PJOK":0,
+"Bahasa Inggris":0,
+"Bahasa Jawa":0,
+"Koding KKA":0,
+"Literasi Digital":0
+}
+},
+
+"UFAIRA ZAHWA AZYANI":{
+kelas:"V",
+nilai:{
+"Pendidikan Agama":0,
+"Pendidikan Pancasila":0,
+"Bahasa Indonesia":0,
+"Matematika":0,
+"IPAS":0,
+"Seni Budaya":0,
+"PJOK":0,
+"Bahasa Inggris":0,
+"Bahasa Jawa":0,
+"Koding KKA":0,
+"Literasi Digital":0
+}
 }
 
-document.getElementById("predikat").innerText = predikat;
+};
+
+const select = document.getElementById("namaSiswa");
+
+Object.keys(siswa).forEach(nama=>{
+    select.innerHTML += `<option value="${nama}">${nama}</option>`;
+});
+
+function tampilkanData(){
+
+    const data = siswa[select.value];
+
+    document.getElementById("kelas").textContent = data.kelas;
+
+    const tbody = document.getElementById("tabelNilai");
+    tbody.innerHTML = "";
+
+    let total = 0;
+    let no = 1;
+
+    for(let mapel in data.nilai){
+
+        total += data.nilai[mapel];
+
+        tbody.innerHTML += `
+        <tr>
+            <td>${no++}</td>
+            <td>${mapel}</td>
+            <td>${data.nilai[mapel]}</td>
+        </tr>
+        `;
+    }
+
+    document.getElementById("rata").textContent =
+        (total / Object.keys(data.nilai).length).toFixed(2);
+}
+
+select.addEventListener("change", tampilkanData);
+
+tampilkanData();
+
 </script>
 
 </body>
